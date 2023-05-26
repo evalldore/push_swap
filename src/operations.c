@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 00:09:34 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/24 21:08:30 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/25 20:24:21 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	swap(t_list *list)
 {
 	void	*temp;
 
-	if (!list || list->next)
+	if (!list || !list->next)
 		return ;
 	temp = list->content;
 	list->content = list->next->content;
