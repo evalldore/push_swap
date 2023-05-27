@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 00:09:34 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/26 01:21:21 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:47:05 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ void	push(t_list **dest_list, t_list **src_list)
 	t_list	*temp;
 
 	temp = *src_list;
-	ft_lstadd_front(dest_list, temp);
 	*src_list = temp->next;
+	temp->next = *dest_list;
+	*dest_list = temp;
+}
+
+void	rotate(t_list	**list)
+{
+	t_list	*temp;
+
+	temp = *list;
+	*list = temp->next;
+	temp->next = NULL;
+	ft_lstadd_back(list, temp);
 }

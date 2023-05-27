@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/26 01:28:09 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:38:47 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,30 @@ static void	populate_list(t_list **list, char **argv)
 	}
 }
 
+static void	print_stack(t_list *stack)
+{
+	while (stack)
+	{
+		printf("%d\n", *(int *)(stack->content));
+		stack = stack->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*a;
 	t_list	*b;
-	t_list	*temp;
 
 	(void)argc;
 	a = NULL;
 	b = NULL;
 	populate_list(&a, &argv[1]);
-	temp = a;
-	while (temp)
-	{
-		printf("%d\n", *(int *)(temp->content));
-		temp = temp->next;
-	}
+	printf("-----A-----\n");
+	print_stack(a);
+	push(&b, &a);
+	printf("-----B-----\n");
+	print_stack(b);
+	printf("-----A-----\n");
+	print_stack(a);
 	return (EXIT_SUCCESS);
 }
