@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.h                                       :+:      :+:    :+:   */
+/*   reverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 20:40:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/29 21:12:07 by evallee-         ###   ########.fr       */
+/*   Created: 2023/05/29 21:05:04 by evallee-          #+#    #+#             */
+/*   Updated: 2023/05/29 21:29:49 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATIONS_H
-# define OPERATIONS_H
-# include "libft.h"
+#include "push_swap.h"
+#include "operations.h"
 
-void	swap(t_list *list);
-void	push(t_list **dest_list, t_list **src_list);
-void	rotate(t_list **list);
-void	reverse(t_list **list);
+void	rra(t_pushswap *ps)
+{
+	reverse(&(ps->a));
+	ft_printf("rra\n");
+}
 
-#endif
+void	rrb(t_pushswap *ps)
+{
+	reverse(&(ps->b));
+	ft_printf("rra\n");
+}
+
+void	rrr(t_pushswap *ps)
+{
+	reverse(&(ps->a));
+	reverse(&(ps->b));
+	ft_printf("rrr\n");
+}

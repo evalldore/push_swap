@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 00:09:34 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/29 20:43:12 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/29 21:34:16 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	reverse(t_list	**list)
 	t_list	*last;
 
 	temp = *list;
+	last = NULL;
 	if (!temp)
 		return ;
-	last = NULL;
 	while (temp)
 	{
 		if (temp->next)
