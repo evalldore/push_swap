@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/26 23:38:47 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:56:12 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ int	main(int argc, char **argv)
 	populate_list(&a, &argv[1]);
 	printf("-----A-----\n");
 	print_stack(a);
-	push(&b, &a);
-	printf("-----B-----\n");
-	print_stack(b);
+	reverse(&a);
 	printf("-----A-----\n");
 	print_stack(a);
 	return (EXIT_SUCCESS);
