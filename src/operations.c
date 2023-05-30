@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 00:09:34 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/29 20:37:53 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/29 20:43:12 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,18 @@ void	reverse(t_list	**list)
 	if (!temp)
 		return ;
 	last = NULL;
-	while (temp && temp->next)
+	while (temp)
 	{
-		last = temp;
-		temp = temp->next;
+		if (temp->next)
+		{
+			last = temp;
+			temp = temp->next;
+		}
+		else
+			break ;
 	}
-	last->next = NULL;
-	ft_lstadd_front(list, temp);
+	if (last)
+		last->next = NULL;
+	if (temp && (*list != temp))
+		ft_lstadd_front(list, temp);
 }
