@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/29 21:38:29 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/31 01:00:15 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ static void	pushswap_init(t_pushswap *ps, char **argv)
 	}
 }
 
-static void	print_stack(t_list *stack)
+static void	print_stack(char c, t_list *stack)
 {
+	printf("--------%c--------\n", c);
 	while (stack)
 	{
-		printf("%d\n", *(int *)(stack->content));
+		printf("\t%d\n", *(int *)(stack->content));
 		stack = stack->next;
 	}
 }
@@ -48,9 +49,8 @@ int	main(int argc, char **argv)
 	ps.a = NULL;
 	ps.b = NULL;
 	pushswap_init(&ps, &argv[1]);
-	print_stack(ps.a);
-	pb(&ps);
-	print_stack(ps.a);
-	print_stack(ps.b);
+	print_stack('a', ps.a);
+	rra(&ps);
+	print_stack('a', ps.a);
 	return (EXIT_SUCCESS);
 }
