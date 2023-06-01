@@ -25,18 +25,21 @@ CC			= gcc
 all : $(NAME)
 
 $(BINDIR)%.o : $(SRCDIR)%.c
-	$(CC) -c $(CFLAGS) -o $@ $^ -I $(INCDIR)
+	@$(CC) -c $(CFLAGS) -o $@ $^ -I $(INCDIR)
 
 $(NAME) : $(BINDIR) $(OBJS)
-	$(LIBC) $@ $(OBJS)
+	@echo LIBFT: Creating library.
+	@$(LIBC) $@ $(OBJS)
 
 $(BINDIR) :
-	mkdir $(BINDIR)
+	@mkdir $(BINDIR)
 
 clean :
-	$(RM) -r $(BINDIR)
+	@echo LIBFT: Clearing binaries
+	@$(RM) -r $(BINDIR)
 
 fclean : clean
-	$(RM) $(NAME)
+	@echo LIBFT: Deleting library.
+	@$(RM) $(NAME)
 
 re : fclean all

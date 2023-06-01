@@ -14,22 +14,25 @@ CC			:= gcc
 all : libft $(NAME)
 
 libft:
-	$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(LIBFT)
 
 $(BINDIR)%.o : $(SRCDIR)%.c
-	$(CC) -c $(CFLAGS) -o $@ $^ $(HEADERS)
+	@$(CC) -c $(CFLAGS) -o $@ $^ $(HEADERS)
 
 $(NAME) : $(BINDIR) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(HEADERS)
+	@echo PUSH_SWAP: Compiling!
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(HEADERS)
 
 $(BINDIR) :
-	mkdir $(BINDIR)
+	@mkdir $(BINDIR)
 
 clean:
+	@echo PUSH_SWAP: Deleting binaries.
 	@rm -r $(BINDIR)
-	$(MAKE) -C $(LIBFT) fclean
+	@$(MAKE) -C $(LIBFT) fclean
 
 fclean: clean
+	@echo PUSH_SWAP: Deleting program.
 	@rm -f $(NAME)
 
 re : fclean all

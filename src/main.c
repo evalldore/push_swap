@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/31 01:00:15 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/31 21:11:58 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	ps.b = NULL;
 	pushswap_init(&ps, &argv[1]);
 	print_stack('a', ps.a);
-	rra(&ps);
+	pb(&ps);
 	print_stack('a', ps.a);
 	return (EXIT_SUCCESS);
 }
