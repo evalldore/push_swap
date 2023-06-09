@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 20:58:03 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/08 14:31:24 by evallee-         ###   ########.fr       */
+/*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
+/*   Updated: 2023/06/09 16:54:00 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "operations.h"
 
-void	sa(t_pushswap *ps)
+bool	is_sorted(t_pushswap *ps)
 {
-	swap(ps->a);
-	ft_printf("sa\n");
+	int		num[2];
+	t_list	*temp;
+
+	if (ft_lstsize(ps->b) > 0)
+		return (false);
+	temp = ps->a;
+	while (temp)
+	{
+		num[0] = *(int *)temp->content;
+		if (temp->next)
+		{
+			num[1] = *(int *)temp->next->content;
+			if (num[1] < num[0])
+				return (false);
+		}
+		temp = temp->next;
+	}
+	return (true);
 }
 
-void	sb(t_pushswap *ps)
+void	sort(t_pushswap *ps)
 {
-	swap(ps->b);
-	ft_printf("sb\n");
-}
-
-void	ss(t_pushswap *ps)
-{
-	swap(ps->a);
-	swap(ps->b);
-	ft_printf("ss\n");
+	if (is_sorted(ps))
+		return ;
+	while (!is_sorted(ps))
+	{
+		
+	}
 }

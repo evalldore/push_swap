@@ -6,13 +6,14 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:37:44 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/29 21:33:51 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:45:43 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <stdlib.h>
+# include <stdbool.h>
 # include "libft.h"
 
 typedef struct s_ps
@@ -36,4 +37,5 @@ void	sa(t_pushswap *ps);
 void	sb(t_pushswap *ps);
 void	ss(t_pushswap *ps);
 
+void	sort(t_pushswap *ps);
 #endif

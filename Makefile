@@ -1,10 +1,10 @@
 NAME		:= push_swap
-SRCS		:= main.c operations.c push.c reverse.c rotate.c swap.c
+SRCS		:= main.c operations.c push.c reverse.c rotate.c swap.c sort.c
 INCDIR		:= include/
 BINDIR		:= bin/
 SRCDIR		:= src/
 OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
-CFLAGS		:= -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror -g
 RM			:= rm -f
 LIBFT		:= ./lib/libft
 LIBS		:= $(LIBFT)/libft.a
