@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/09 16:54:00 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:01:46 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,60 @@ bool	is_sorted(t_pushswap *ps)
 	return (true);
 }
 
+void	find_node(t_find *res, t_list *stack)
+{
+	int		num[2];
+	size_t	pos;
+
+	if (!stack)
+		return ;
+	res->found = stack;
+	res->pos = 0;
+	pos = 0;
+	while(stack)
+	{
+		num[0] = *(int *)res->found->content;
+		num[1] = *(int *)stack->content;
+		if (num[1] < num[0])
+		{
+			res->found = stack;
+			res->pos = pos;
+		}
+		stack = stack->next;
+		pos++;
+	}
+}
+
+void	set_top(t_pushswap *ps)
+{
+	t_find	res;
+	size_t	size;
+
+	res.found = NULL;
+	res.pos = -1;
+	find_node(&res, ps->a);
+	if (!res.found)
+		return ;
+	size = ft_lstsize(ps->a);
+	while (ps->a != res.found)
+	{
+		if ((size / 2) > res.pos)
+			ra(ps);
+		else
+			rra(ps);
+	}
+}
+
 void	sort(t_pushswap *ps)
 {
 	if (is_sorted(ps))
 		return ;
-	while (!is_sorted(ps))
-	{
-		
-	}
+	set_top(ps);
+	printf("%d\n", *(int *)ps->a->content);
+	pb(ps);
+	printf("%d\n", *(int *)ps->b->content);
+	set_top(ps);
+	printf("%d\n", *(int *)ps->a->content);
+	pb(ps);
+	printf("%d\n", *(int *)ps->b->content);
 }
