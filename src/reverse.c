@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 21:05:04 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/08 14:24:35 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:32:53 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rra(t_pushswap *ps)
 void	rrb(t_pushswap *ps)
 {
 	reverse(&(ps->b));
-	ft_printf("rra\n");
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_pushswap *ps)

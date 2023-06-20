@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 21:01:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/08 14:36:24 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:35:28 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 void	ra(t_pushswap *ps)
 {
-	reverse(&(ps->a));
+	rotate(&(ps->a));
 	ft_printf("ra\n");
 }
 
 void	rb(t_pushswap *ps)
 {
-	reverse(&(ps->b));
+	rotate(&(ps->b));
 	ft_printf("rb\n");
 }
 

@@ -13,6 +13,9 @@ CC			:= gcc
 
 all : libft $(NAME)
 
+visualizer :
+	./push_swap_visualizer/build/bin/visualizer
+
 libft:
 	@$(MAKE) -C $(LIBFT)
 
