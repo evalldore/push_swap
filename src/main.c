@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/09 15:44:42 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/06/19 23:13:22 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int	main(int argc, char **argv)
 	(void)argc;
 	pushswap_init(&ps, &argv[1]);
 	sort(&ps);
+	//print_stack('a', ps.a);
 	return (EXIT_SUCCESS);
 }

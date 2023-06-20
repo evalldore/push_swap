@@ -3,3 +3,4 @@ push_swap
 .DS_Store
 bin/
 *.a
+/push_swap_visualizer

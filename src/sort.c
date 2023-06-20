@@ -6,32 +6,37 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/19 19:01:46 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/06/19 22:50:44 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	is_sorted(t_pushswap *ps)
+static bool	is_stack_sorted(t_list	*list)
 {
 	int		num[2];
-	t_list	*temp;
 
-	if (ft_lstsize(ps->b) > 0)
+	if (!list)
 		return (false);
-	temp = ps->a;
-	while (temp)
+	while (list)
 	{
-		num[0] = *(int *)temp->content;
-		if (temp->next)
+		num[0] = *(int *)list->content;
+		if (list->next)
 		{
-			num[1] = *(int *)temp->next->content;
+			num[1] = *(int *)list->next->content;
 			if (num[1] < num[0])
 				return (false);
 		}
-		temp = temp->next;
+		list = list->next;
 	}
 	return (true);
+}
+
+bool	is_sorted(t_pushswap *ps)
+{
+	if (ft_lstsize(ps->b) > 0)
+		return (false);
+	return (is_stack_sorted(ps->a));
 }
 
 void	find_node(t_find *res, t_list *stack)
@@ -82,12 +87,14 @@ void	sort(t_pushswap *ps)
 {
 	if (is_sorted(ps))
 		return ;
-	set_top(ps);
-	printf("%d\n", *(int *)ps->a->content);
-	pb(ps);
-	printf("%d\n", *(int *)ps->b->content);
-	set_top(ps);
-	printf("%d\n", *(int *)ps->a->content);
-	pb(ps);
-	printf("%d\n", *(int *)ps->b->content);
+	while (!is_sorted(ps))
+	{
+		while (ps->a)
+		{
+			set_top(ps);
+			pb(ps);
+		}
+		while (ps->b)
+			pa(ps);
+	}
 }
