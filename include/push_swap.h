@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:37:44 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/19 18:25:30 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/06/22 04:40:53 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ typedef struct s_find
 	size_t	pos;
 }	t_find;
 
+typedef struct s_num
+{
+	int		num;
+	size_t	index;
+}	t_num;
+
 void	pa(t_pushswap *ps);
 void	pb(t_pushswap *ps);
 
@@ -44,4 +50,6 @@ void	sb(t_pushswap *ps);
 void	ss(t_pushswap *ps);
 
 void	sort(t_pushswap *ps);
+void	assign_index(t_pushswap *ps);
+
 #endif

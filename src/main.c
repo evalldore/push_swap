@@ -6,28 +6,27 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/20 01:23:32 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/06/22 04:30:04 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "push_swap.h"
 
 static void	pushswap_init(t_pushswap *ps, char **argv)
 {
-	int		*num;
+	t_num		*num;
 
 	ps->a = NULL;
 	ps->b = NULL;
 	while (*argv)
 	{
-		num = malloc(sizeof(int *));
+		num = malloc(sizeof(t_num));
 		if (!num)
 		{
 			ft_lstclear(&(ps->a), free);
 			return ;
 		}
-		*num = ft_atoi(*argv);
+		num->num = ft_atoi(*argv);
 		ft_lstadd_back(&(ps->a), ft_lstnew(num));
 		argv++;
 	}

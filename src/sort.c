@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/20 01:31:57 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/06/22 04:33:08 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static bool	is_stack_sorted(t_list	*list)
 		return (false);
 	while (list)
 	{
-		num[0] = *(int *)list->content;
+		num[0] = ((t_num*)list->content)->num;
 		if (list->next)
 		{
-			num[1] = *(int *)list->next->content;
+			num[1] = ((t_num*)list->next->content)->num;
 			if (num[1] < num[0])
 				return (false);
 		}
@@ -32,14 +32,14 @@ static bool	is_stack_sorted(t_list	*list)
 	return (true);
 }
 
-bool	is_sorted(t_pushswap *ps)
+static bool	is_sorted(t_pushswap *ps)
 {
 	if (ft_lstsize(ps->b) > 0)
 		return (false);
 	return (is_stack_sorted(ps->a));
 }
 
-void	find_node(t_find *res, t_list *stack)
+static void	find_node(t_find *res, t_list *stack)
 {
 	int		num[2];
 	size_t	pos;
@@ -51,8 +51,8 @@ void	find_node(t_find *res, t_list *stack)
 	pos = 0;
 	while(stack)
 	{
-		num[0] = *(int *)res->found->content;
-		num[1] = *(int *)stack->content;
+		num[0] = ((t_num*)res->found->content)->num;
+		num[1] = ((t_num*)stack->content)->num;
 		if (num[1] < num[0])
 		{
 			res->found = stack;
@@ -63,25 +63,39 @@ void	find_node(t_find *res, t_list *stack)
 	}
 }
 
-void	set_top(t_pushswap *ps)
+static void	set_top(t_pushswap *ps)
 {
 	t_find	res;
-	size_t	size;
 
 	res.found = NULL;
 	res.pos = -1;
 	find_node(&res, ps->a);
 	if (!res.found)
 		return ;
-	size = ft_lstsize(ps->a);
 	while (ps->a != res.found)
 	{
-		if ((size / 2) > res.pos)
+		if ((ft_lstsize(ps->a) / 2) > res.pos)
 			ra(ps);
 		else
 			rra(ps);
 	}
 }
+
+/*void	trim(t_pushswap *ps)
+{
+	int	*num[2];
+
+	pb(ps);
+	while (ps->a)
+	{
+		num[0] = ps->a->content;
+		num[1] = ps->b->content;
+		if (*num[0] < *num[1])
+			pb(ps);
+		else
+			ra(ps);
+	}
+}*/
 
 void	sort(t_pushswap *ps)
 {
@@ -89,6 +103,7 @@ void	sort(t_pushswap *ps)
 		return ;
 	while (!is_sorted(ps))
 	{
+		//trim(ps);
 		while (ps->a)
 		{
 			set_top(ps);
