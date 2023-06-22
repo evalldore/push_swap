@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/22 04:30:04 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/06/22 04:42:46 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ static void	pushswap_init(t_pushswap *ps, char **argv)
 		argv++;
 	}
 }
-
-/*static void	print_stack(char c, t_list *stack)
-{
-	printf("--------%c--------\n", c);
-	while (stack)
-	{
-		printf("\t%d\n", *(int *)(stack->content));
-		stack = stack->next;
-	}
-}*/
 
 int	main(int argc, char **argv)
 {
