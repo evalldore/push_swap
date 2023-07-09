@@ -1,5 +1,5 @@
 NAME		:= push_swap
-SRCS		:= main.c operations.c push.c reverse.c rotate.c swap.c sort.c index.c
+SRCS		:= main.c operations.c push.c reverse.c rotate.c swap.c sort.c find.c index.c
 INCDIR		:= include/
 BINDIR		:= bin/
 SRCDIR		:= src/

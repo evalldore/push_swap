@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:37:44 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/22 04:40:53 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/06 14:32:10 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_ps
 {
 	t_list	*a;
 	t_list	*b;
+	t_list	*c;
 }	t_pushswap;
 
 typedef struct s_find
@@ -31,7 +32,7 @@ typedef struct s_find
 typedef struct s_num
 {
 	int		num;
-	size_t	index;
+	ssize_t	index;
 }	t_num;
 
 void	pa(t_pushswap *ps);
@@ -49,7 +50,12 @@ void	sa(t_pushswap *ps);
 void	sb(t_pushswap *ps);
 void	ss(t_pushswap *ps);
 
-void	sort(t_pushswap *ps);
-void	assign_index(t_pushswap *ps);
+void	sort(t_pushswap *ps, size_t num);
+
+size_t	find_smallest(t_list **var, t_list *stack);
+t_list	*find_shortest(t_list *sorted, t_list *stack, size_t max);
+
+void	assign_index(t_list *stack);
+size_t	get_pos(t_list* stack, t_list* target);
 
 #endif

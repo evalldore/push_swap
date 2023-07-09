@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/06/22 04:46:27 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/09 19:14:11 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	is_stack_sorted(t_list	*list)
 {
-	t_num	*num[2];
+	int	*num[2];
 
 	if (!list)
 		return (false);
@@ -24,7 +24,7 @@ static bool	is_stack_sorted(t_list	*list)
 		if (list->next)
 		{
 			num[1] = list->next->content;
-			if (num[1]->num < num[0]->num)
+			if (*num[1] < *num[0])
 				return (false);
 		}
 		list = list->next;
@@ -39,61 +39,82 @@ static bool	is_sorted(t_pushswap *ps)
 	return (is_stack_sorted(ps->a));
 }
 
-static void	find_node(t_find *res, t_list *stack)
+/*static void	set_top(t_pushswap *ps, size_t num)
 {
-	t_num	*num[2];
 	size_t	pos;
+	t_list	*shortest;
+	t_list	*sorted;
+	t_list	*temp;
 
-	if (!stack)
+	sorted = ps->c;
+	shortest = find_shortest(sorted, ps->a, num / 4);
+	pos = get_pos(ps->a, shortest);
+	if (!shortest)
 		return ;
-	res->found = stack;
-	res->pos = 0;
-	pos = 0;
-	while(stack)
+	while (ps->a != shortest)
 	{
-		num[0] = res->found->content;
-		num[1] = stack->content;
-		if (num[1]->num < num[0]->num)
-		{
-			res->found = stack;
-			res->pos = pos;
-		}
-		stack = stack->next;
-		pos++;
-	}
-}
-
-static void	set_top(t_pushswap *ps)
-{
-	t_find	res;
-
-	res.found = NULL;
-	res.pos = -1;
-	find_node(&res, ps->a);
-	if (!res.found)
-		return ;
-	while (ps->a != res.found)
-	{
-		if ((ft_lstsize(ps->a) / 2) > res.pos)
+		if ((ft_lstsize(ps->a) / 2) > pos)
 			ra(ps);
 		else
 			rra(ps);
 	}
+	while (sorted)
+	{
+		if (sorted->next && (sorted->next->content == shortest->content))
+		{
+			temp = sorted->next;
+			sorted->next = temp->next;
+			free(temp);
+			break;
+		}
+		sorted = sorted->next;
+	}
+}*/
+
+static t_list *get_target(t_list *sorted, size_t index)
+{
+	index = index;
+	while (sorted && index > 0)
+	{
+		if (!sorted->next)
+			break;
+		index--;
+		sorted = sorted->next;
+	}
+	return (sorted);
 }
 
-void	sort(t_pushswap *ps)
+static bool is_target_done(t_list *stack, t_list *target)
 {
+	while(stack)
+	{
+		if (*(int *)stack->content <= *(int *)target->content)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
+}
+
+void	sort(t_pushswap *ps, size_t num)
+{
+	size_t	quarter;
+	t_list	*target;
+
 	if (is_sorted(ps))
 		return ;
-	while (!is_sorted(ps))
+	quarter = num / 4;
+	target = get_target(ps->c, quarter);
+	while (ps->a)
 	{
-		//trim(ps);
-		while (ps->a)
+		while (ps->a && !is_target_done(ps->a, target))
 		{
-			set_top(ps);
-			pb(ps);
+			if (*(int *)ps->a->content <= *(int *)target->content)
+				pb(ps);
+			else
+				ra(ps);
 		}
-		while (ps->b)
-			pa(ps);
+		target = get_target(target, quarter);
 	}
+	while (ps->b)
+		pa(ps);
 }
