@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/15 05:52:29 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/15 06:02:49 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,26 @@ static void transfer_chunk(t_pushswap *ps, t_list *target)
 	}
 }
 
+static size_t	get_content_pos(t_list	*stack, void *content)
+{
+	size_t	pos;
+
+	if (!stack || !content)
+		return (0);
+	pos = 0;
+	while (stack)
+	{
+		if (stack->content == content)
+			return (pos);
+		pos++;
+		stack = stack->next;
+	}
+	return (0);
+}
+
 static void sort_chunk(t_pushswap *ps, size_t index)
 {
+	size_t	pos;
 	t_list	*target;
 
 	if (!ps->b)
@@ -143,13 +161,17 @@ static void sort_chunk(t_pushswap *ps, size_t index)
 		return ;
 	}
 	target = get_target(ps->c, index);
+	pos = get_content_pos(ps->b, target->content);
 	if (target->content == ps->b->content)
 	{
 		pa(ps);
 		sort_chunk(ps, --index);
 		return ;
 	}
-	rb(ps);
+	if (pos > ft_lstsize(ps->b) / 2)
+		rrb(ps);
+	else
+		rb(ps);
 	sort_chunk(ps, index);
 }
 
