@@ -6,13 +6,13 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/09 19:14:11 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/15 05:52:29 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static bool	is_stack_sorted(t_list	*list)
+static bool	is_stack_sorted(t_list	*list, bool greater)
 {
 	int	*num[2];
 
@@ -24,8 +24,16 @@ static bool	is_stack_sorted(t_list	*list)
 		if (list->next)
 		{
 			num[1] = list->next->content;
-			if (*num[1] < *num[0])
-				return (false);
+			if (greater)
+			{
+				if (*num[0] < *num[1])
+					return (false);
+			}
+			else
+			{
+				if (*num[0] > *num[1])
+					return (false);
+			}
 		}
 		list = list->next;
 	}
@@ -36,40 +44,9 @@ static bool	is_sorted(t_pushswap *ps)
 {
 	if (ft_lstsize(ps->b) > 0)
 		return (false);
-	return (is_stack_sorted(ps->a));
+	return (is_stack_sorted(ps->a, false));
 }
 
-/*static void	set_top(t_pushswap *ps, size_t num)
-{
-	size_t	pos;
-	t_list	*shortest;
-	t_list	*sorted;
-	t_list	*temp;
-
-	sorted = ps->c;
-	shortest = find_shortest(sorted, ps->a, num / 4);
-	pos = get_pos(ps->a, shortest);
-	if (!shortest)
-		return ;
-	while (ps->a != shortest)
-	{
-		if ((ft_lstsize(ps->a) / 2) > pos)
-			ra(ps);
-		else
-			rra(ps);
-	}
-	while (sorted)
-	{
-		if (sorted->next && (sorted->next->content == shortest->content))
-		{
-			temp = sorted->next;
-			sorted->next = temp->next;
-			free(temp);
-			break;
-		}
-		sorted = sorted->next;
-	}
-}*/
 
 static t_list *get_target(t_list *sorted, size_t index)
 {
@@ -95,26 +72,100 @@ static bool is_target_done(t_list *stack, t_list *target)
 	return (true);
 }
 
-void	sort(t_pushswap *ps, size_t num)
+/*static void insert_sort(t_pushswap *ps, t_list *start)
+{
+	int	*num[2];
+
+	num[0] = ps->a->content;
+	num[1] = ps->b->content;
+	if (ps->b->next == start)
+	{
+		if (*num[0] > *num[1])
+		{
+			rb(ps);
+			pb(ps);
+			rrb(ps);
+		}
+		else
+			pb(ps);
+		return ;
+	}
+	if (*num[0] > *num[1])
+		pb(ps);
+	else
+	{
+		rb(ps);
+		insert_sort(ps, start);
+		rrb(ps);
+	}
+}*/
+
+static void transfer_chunk(t_pushswap *ps, t_list *target)
+{
+	while (ps->a && !is_target_done(ps->a, target))
+	{
+		if (*(int *)ps->a->content <= *(int *)target->content)
+		{
+			if (!ps->b)
+				pb(ps);
+			else
+			{
+				if (*(int *)ps->a->content > *(int *)ps->b->content)
+					pb(ps);
+				else
+				{
+					/*if (!ps->b->next)
+					{
+						pb(ps);
+						rb(ps);
+					}
+					else
+						insert_sort(ps, ps->b);*/
+					pb(ps);
+					sb(ps);
+				}
+			}
+		}
+		else
+			ra(ps);
+	}
+}
+
+static void sort_chunk(t_pushswap *ps, size_t index)
+{
+	t_list	*target;
+
+	if (!ps->b)
+		return;
+	if (!ps->b->next)
+	{
+		pa(ps);
+		return ;
+	}
+	target = get_target(ps->c, index);
+	if (target->content == ps->b->content)
+	{
+		pa(ps);
+		sort_chunk(ps, --index);
+		return ;
+	}
+	rb(ps);
+	sort_chunk(ps, index);
+}
+
+void	sort(t_pushswap *ps)
 {
 	size_t	quarter;
 	t_list	*target;
 
 	if (is_sorted(ps))
 		return ;
-	quarter = num / 4;
+	quarter = ps->num / DIVIDER;
 	target = get_target(ps->c, quarter);
 	while (ps->a)
 	{
-		while (ps->a && !is_target_done(ps->a, target))
-		{
-			if (*(int *)ps->a->content <= *(int *)target->content)
-				pb(ps);
-			else
-				ra(ps);
-		}
+		transfer_chunk(ps, target);
 		target = get_target(target, quarter);
 	}
-	while (ps->b)
-		pa(ps);
+	sort_chunk(ps, ps->num - 1);
 }

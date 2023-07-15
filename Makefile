@@ -4,7 +4,7 @@ INCDIR		:= include/
 BINDIR		:= bin/
 SRCDIR		:= src/
 OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
-CFLAGS		:= -Wall -Wextra -Werror -g
+CFLAGS		:= -Wall -Wextra -Werror -g -D DIVIDER=4
 RM			:= rm -f
 LIBFT		:= ./lib/libft
 LIBS		:= $(LIBFT)/libft.a

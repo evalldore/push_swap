@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:37:44 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/06 14:32:10 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/09 20:44:40 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,17 @@
 # include <stdbool.h>
 # include "libft.h"
 
+# ifndef DIVIDER
+# define DIVIDER 4
+# endif
+
 typedef struct s_ps
 {
 	t_list	*a;
 	t_list	*b;
 	t_list	*c;
+	size_t	num;
 }	t_pushswap;
-
-typedef struct s_find
-{
-	t_list	*found;
-	size_t	pos;
-}	t_find;
-
-typedef struct s_num
-{
-	int		num;
-	ssize_t	index;
-}	t_num;
 
 void	pa(t_pushswap *ps);
 void	pb(t_pushswap *ps);
@@ -50,7 +43,7 @@ void	sa(t_pushswap *ps);
 void	sb(t_pushswap *ps);
 void	ss(t_pushswap *ps);
 
-void	sort(t_pushswap *ps, size_t num);
+void	sort(t_pushswap *ps);
 
 size_t	find_smallest(t_list **var, t_list *stack);
 t_list	*find_shortest(t_list *sorted, t_list *stack, size_t max);
