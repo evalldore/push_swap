@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:02:36 by niceguy           #+#    #+#             */
-/*   Updated: 2023/07/06 14:32:01 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/15 06:30:27 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,34 @@ void	assign_index(t_list *stack)
 	}
 }
 
-size_t	get_pos(t_list* stack, t_list* target)
+size_t	get_index(t_list	*stack, void *content)
 {
 	size_t	pos;
 
+	if (!stack || !content)
+		return (0);
 	pos = 0;
-	while(stack)
+	while (stack)
 	{
-		if (stack == target)
-			break;
+		if (stack->content == content)
+			return (pos);
 		pos++;
 		stack = stack->next;
 	}
-	return (pos);
+	return (0);
+}
+
+t_list	*get_node(t_list *stack, size_t index)
+{
+	if (!stack)
+		return (NULL);
+	index = index;
+	while (stack && index > 0)
+	{
+		if (!stack->next)
+			break;
+		index--;
+		stack = stack->next;
+	}
+	return (stack);
 }

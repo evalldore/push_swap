@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/15 05:37:17 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/15 06:30:41 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,11 @@ static void	pushswap_init(t_pushswap *ps, int argc, char **argv)
 	assign_index(ps->c);
 }
 
-/*static void	print_stack(char c, t_list *stack)
+static void pushswap_clean(t_pushswap *ps)
 {
-	int	*num;
-
-	printf("--------%c--------\n", c);
-	while (stack)
-	{
-		num = stack->content;
-		ft_printf("\t%d\n", *num);
-		stack = stack->next;
-	}
-}*/
+	ft_lstclear(&ps->c, NULL);
+	ft_lstclear(&ps->a, &free);
+}
 
 int	main(int argc, char **argv)
 {
@@ -55,6 +48,6 @@ int	main(int argc, char **argv)
 
 	pushswap_init(&ps, argc, &argv[1]);
 	sort(&ps);
-	//print_stack('a', ps.a);
+	pushswap_clean(&ps);
 	return (EXIT_SUCCESS);
 }
