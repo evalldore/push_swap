@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/17 02:39:44 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/17 03:27:26 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,38 @@ static bool validate_arg(char *arg)
 	return (true);
 }
 
-static bool	pushswap_init(t_pushswap *ps, int argc, char **argv)
+static bool	validate_int(int integer)
+{
+	return (true);
+}
+
+static uint32_t	pushswap_init(t_pushswap *ps, char **argv)
 {
 	t_list	*node;
+	int		integer;
 	int		*num;
 
-	ps->a = NULL;
-	ps->b = NULL;
-	ps->c = NULL;
-	ps->num = argc - 1;
 	while (*argv)
 	{
 		if (!validate_arg(*argv))
-			return (false);
+			return (ERROR_NAN);
+		integer = ft_atoi(*argv++);
+		if (!validate_int(integer))
+			return (ERROR_OOB);
 		num = malloc(sizeof(int));
 		if (!num)
-			return (false);
-		*num = ft_atoi(*argv++);
+			return (ERROR_ALOC);
+		*num = integer;
 		node = ft_lstnew(num);
 		if (!node)
-			return (false);
+			return (ERROR_ALOC);
 		ft_lstadd_back(&(ps->a), node);
 		node = ft_lstnew(num);
 		if (!node)
-			return (false);
+			return (ERROR_ALOC);
 		ft_lstadd_back(&(ps->c), node);
 	}
-	return (true);
+	return (ERROR_NONE);
 }
 
 static void pushswap_clean(t_pushswap *ps)
@@ -64,14 +69,24 @@ static void pushswap_clean(t_pushswap *ps)
 int	main(int argc, char **argv)
 {
 	t_pushswap	ps;
+	uint32_t	status;
 
-	if (pushswap_init(&ps, argc, &argv[1]))
+	ps.a = NULL;
+	ps.b = NULL;
+	ps.c = NULL;
+	ps.num = argc - 1;
+	status = pushswap_init(&ps, &argv[1]);
+	if (status == ERROR_NONE)
 	{
 		assign_index(ps.c);
 		sort(&ps);
 	}
-	else
-		ft_printf("Error\n");
+	else if (status == ERROR_NAN)
+		ft_printf("Error: Argument isnt a number\n");
+	else if (status == ERROR_DUP)
+		ft_printf("Error: Duplicated number\n");
+	else if (status == ERROR_OOB)
+		ft_printf("Error: Number overflows 32 bit integer\n");
 	pushswap_clean(&ps);
 	return (EXIT_SUCCESS);
 }

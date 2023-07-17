@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:37:44 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/15 06:42:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/17 03:18:00 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 # define PUSH_SWAP_H
 # include <stdlib.h>
 # include <stdbool.h>
+# include <stdint.h>
 # include "libft.h"
 
 # ifndef DIVIDER
 # define DIVIDER 4
 # endif
+
+# define ERROR_NONE 0
+# define ERROR_DUP 1
+# define ERROR_NAN 2
+# define ERROR_OOB 3
+# define ERROR_ALOC 4
 
 typedef struct s_ps
 {
