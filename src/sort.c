@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:01:55 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/15 06:30:53 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/17 02:41:26 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,7 @@ static void transfer_chunk(t_pushswap *ps, t_list *target)
 	while (ps->a && !is_target_done(ps->a, target))
 	{
 		if (*(int *)ps->a->content <= *(int *)target->content)
-		{
-			if (!ps->b)
-				pb(ps);
-			else
-			{
-				if (*(int *)ps->a->content > *(int *)ps->b->content)
-					pb(ps);
-				else
-				{
-					pb(ps);
-					sb(ps);
-				}
-			}
-		}
+			pb(ps);
 		else
 			ra(ps);
 	}
@@ -112,7 +99,7 @@ void	sort(t_pushswap *ps)
 		return ;
 	if (is_stack_sorted(ps->a, false))
 		return ;
-	quarter = ps->num / DIVIDER;
+	quarter = (ps->num / DIVIDER) + 1;
 	target = get_node(ps->c, quarter);
 	while (ps->a)
 	{

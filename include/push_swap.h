@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:37:44 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/15 06:26:38 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/15 06:42:38 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ss(t_pushswap *ps);
 
 void	sort(t_pushswap *ps);
 
-size_t	find_smallest(t_list **var, t_list *stack);
 t_list	*find_shortest(t_list *sorted, t_list *stack, size_t max);
 
 void	assign_index(t_list *stack);
