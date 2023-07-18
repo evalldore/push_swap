@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:53:05 by evallee-          #+#    #+#             */
-/*   Updated: 2023/07/17 03:27:26 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/07/18 19:35:21 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static bool validate_arg(char *arg)
 {
 	char	*c;
 
+	if (*arg == '-' || *arg == '+')
+		arg++;
 	c = arg;
 	while (*c)
 	{
@@ -26,16 +28,20 @@ static bool validate_arg(char *arg)
 	return (true);
 }
 
-static bool	validate_int(int integer)
+static bool	validate_int(int64_t integer)
 {
+	if (integer > INT32_MAX)
+		return (false);
+	if (integer < INT32_MIN)
+		return (false);
 	return (true);
 }
 
 static uint32_t	pushswap_init(t_pushswap *ps, char **argv)
 {
-	t_list	*node;
-	int		integer;
-	int		*num;
+	t_list		*node;
+	int64_t		integer;
+	int			*num;
 
 	while (*argv)
 	{
@@ -47,7 +53,7 @@ static uint32_t	pushswap_init(t_pushswap *ps, char **argv)
 		num = malloc(sizeof(int));
 		if (!num)
 			return (ERROR_ALOC);
-		*num = integer;
+		*num = (int)integer;
 		node = ft_lstnew(num);
 		if (!node)
 			return (ERROR_ALOC);
